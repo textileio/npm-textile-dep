@@ -4,7 +4,7 @@ import path from 'path'
 import tarFS from 'tar-fs'
 import { Extract } from 'unzip-stream'
 import fetch from 'node-fetch'
-import Octokit from '@octokit/rest'
+import * as Octokit from '@octokit/rest'
 import jp from 'jsonpath'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json')
