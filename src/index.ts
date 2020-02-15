@@ -87,6 +87,7 @@ export default async function(...args: string[]): Promise<Result> {
         tag: cleaned.version,
       })
     }
+
     const { data } = result
     const query = jp.query(
       data,
