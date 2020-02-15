@@ -12,7 +12,6 @@
     "clean": "rimraf ./dist ./binary",
     "build": "tsc",
     "fetch": "node ./dist/bin.js",
-    "prepare": "npm run build",
     "test": "jest --no-watchman --config jest.config.json",
     "lint": "eslint --fix --ext .mjs,.js,.jsx,.ts,.tsx src && echo 'Lint complete.'",
     "preversion": "npm run lint",
