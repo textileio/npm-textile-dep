@@ -43,13 +43,6 @@ async function download(installPath: string, url: string) {
 }
 
 function cleanArguments(...[version, platform, arch, installPath]: string[]) {
-  const conf = pkgConf.sync('textile', {
-    cwd: path.join(process.cwd(), '..'),
-    defaults: {
-      version: 'v' + pkg.version.replace(/-[0-9]+/, ''),
-    },
-  })
-
   return {
     version: process.env.TARGET_VERSION || version || 'next',
     platform: process.env.TARGET_OS || platform || goenv.GOOS,
