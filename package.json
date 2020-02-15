@@ -40,7 +40,7 @@
   "author": "textile.io",
   "license": "MIT",
   "dependencies": {
-    "@octokit/rest": "^16.28.6",
+    "@octokit/rest": "^16.43.1",
     "execa": "^2.0.3",
     "go-platform": "^1.0.0",
     "gunzip-maybe": "^1.4.1",
