@@ -4,7 +4,6 @@ import path from 'path'
 import tarFS from 'tar-fs'
 import { Extract } from 'unzip-stream'
 import fetch from 'node-fetch'
-import pkgConf from 'pkg-conf'
 import Octokit from '@octokit/rest'
 import jp from 'jsonpath'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -72,6 +71,7 @@ export default async function(...args: string[]): Promise<Result> {
     const settings = { owner: 'textileio', repo: 'textile' }
     let result
     if (cleaned.version === 'next') {
+      // @ts-ignore
       result = await octokit.repos.getLatestRelease(settings)
       cleaned.version = result.data.name
     } else {
