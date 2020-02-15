@@ -12,7 +12,6 @@
     "clean": "rimraf ./dist ./binary",
     "build": "tsc",
     "fetch": "node ./dist/bin.js",
-    "prepare": "npm run build",
     "install": "npm run build && npm run fetch",
     "test": "jest --no-watchman --config jest.config.json",
     "lint": "eslint --fix --ext .mjs,.js,.jsx,.ts,.tsx src && echo 'Lint complete.'",
@@ -40,7 +39,7 @@
   "author": "textile.io",
   "license": "MIT",
   "dependencies": {
-    "@octokit/rest": "^16.28.6",
+    "@octokit/rest": "^16.43.1",
     "execa": "^2.0.3",
     "go-platform": "^1.0.0",
     "gunzip-maybe": "^1.4.1",
@@ -49,8 +48,7 @@
     "pkg-conf": "^3.1.0",
     "rimraf": "^2.6.3",
     "tar-fs": "^2.0.0",
-    "unzip-stream": "^0.3.0",
-    "typescript": "^3.5.3"
+    "unzip-stream": "^0.3.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
@@ -70,6 +68,7 @@
     "prettier": "^1.18.2",
     "prettier-eslint": "^8.8.2",
     "ts-jest": "^24.0.2",
-    "ts-loader": "^5.4.4"
+    "ts-loader": "^5.4.4",
+    "typescript": "^3.7.2"
   }
 }

@@ -4,18 +4,14 @@ import path from 'path'
 import tarFS from 'tar-fs'
 import { Extract } from 'unzip-stream'
 import fetch from 'node-fetch'
-import pkgConf from 'pkg-conf'
 import Octokit from '@octokit/rest'
 import jp from 'jsonpath'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('../package.json')
 
 export interface Result {
   fileName: string
   installPath: string
 }
-
-const octokit = new Octokit()
 
 function unpack(url: string, installPath: string, stream: NodeJS.ReadableStream) {
   return new Promise((resolve, reject) => {
@@ -43,15 +39,8 @@ async function download(installPath: string, url: string) {
 }
 
 function cleanArguments(...[version, platform, arch, installPath]: string[]) {
-  const conf = pkgConf.sync('textile', {
-    cwd: path.join(process.cwd(), '..'),
-    defaults: {
-      version: 'v' + pkg.version.replace(/-[0-9]+/, ''),
-    },
-  })
-
   return {
-    version: process.env.TARGET_VERSION || version || conf.version,
+    version: process.env.TARGET_VERSION || version || 'next',
     platform: process.env.TARGET_OS || platform || goenv.GOOS,
     arch: arch || process.env.TARGET_ARCH || goenv.GOARCH,
     installPath: path.join(installPath ? path.resolve(installPath) : process.cwd(), 'binary'),
@@ -75,10 +64,12 @@ function cleanArguments(...[version, platform, arch, installPath]: string[]) {
  */
 export default async function(...args: string[]): Promise<Result> {
   const cleaned = await cleanArguments(...args)
+  const octokit = new Octokit.Octokit()
   try {
     const settings = { owner: 'textileio', repo: 'textile' }
     let result
     if (cleaned.version === 'next') {
+      // @ts-ignore
       result = await octokit.repos.getLatestRelease(settings)
       cleaned.version = result.data.name
     } else {
@@ -87,6 +78,7 @@ export default async function(...args: string[]): Promise<Result> {
         tag: cleaned.version,
       })
     }
+
     const { data } = result
     const query = jp.query(
       data,

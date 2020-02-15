@@ -45,11 +45,7 @@ jobs:
     - name: NPM Install
       run: npm install
 
-    - name: Test Node
-      run: |
-        npm run test:node
-
-    - name: Test Browser
+    - name: Test
       run: |
         mkdir -p test-results/jest
         npm run test

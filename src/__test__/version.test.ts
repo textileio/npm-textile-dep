@@ -10,7 +10,7 @@ import execa from 'execa'
   - ensure that the "textile.version" prop in the package.json is used
 */
 
-const testVersion = require('./__fixture__/example/package.json')['textile'].version
+const testVersion = 'v0.0.2'
 let tarballName: string
 
 function packTarball() {
