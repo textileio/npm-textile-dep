@@ -51,7 +51,7 @@ function cleanArguments(...[version, platform, arch, installPath]: string[]) {
   })
 
   return {
-    version: process.env.TARGET_VERSION || version || conf.version,
+    version: process.env.TARGET_VERSION || version || 'next',
     platform: process.env.TARGET_OS || platform || goenv.GOOS,
     arch: arch || process.env.TARGET_ARCH || goenv.GOARCH,
     installPath: path.join(installPath ? path.resolve(installPath) : process.cwd(), 'binary'),
