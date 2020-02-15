@@ -4,17 +4,14 @@ import path from 'path'
 import tarFS from 'tar-fs'
 import { Extract } from 'unzip-stream'
 import fetch from 'node-fetch'
-import * as Octokit from '@octokit/rest'
+import Octokit from '@octokit/rest'
 import jp from 'jsonpath'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('../package.json')
 
 export interface Result {
   fileName: string
   installPath: string
 }
-
-const octokit = new Octokit()
 
 function unpack(url: string, installPath: string, stream: NodeJS.ReadableStream) {
   return new Promise((resolve, reject) => {
@@ -67,6 +64,7 @@ function cleanArguments(...[version, platform, arch, installPath]: string[]) {
  */
 export default async function(...args: string[]): Promise<Result> {
   const cleaned = await cleanArguments(...args)
+  const octokit = new Octokit.Octokit()
   try {
     const settings = { owner: 'textileio', repo: 'textile' }
     let result
